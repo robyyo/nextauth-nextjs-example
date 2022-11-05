@@ -1,9 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './Header.module.css';
-import { signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import AuthButton from './login-btn';
 
 const Header = () => {
+  const { data: session, status } = useSession();
+
+  console.log(session);
+  console.log(status);
+
   return (
     <header className={styles.header}>
       <div>
@@ -13,9 +19,7 @@ const Header = () => {
       </div>
       <nav>
         <ul className={styles.navbar}>
-          <li className={styles.link}>
-            <button onClick={() => signIn()}>Sign In</button>
-          </li>
+          <AuthButton />
         </ul>
       </nav>
     </header>
